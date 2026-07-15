@@ -4,8 +4,8 @@ import 'package:get/get.dart';
 import '../controllers/share_controller.dart';
 import '../widgets/peer_tile.dart';
 
-class PeerDiscoveryScreen extends GetView<ShareController> {
-  const PeerDiscoveryScreen({super.key});
+class ShareScreen extends GetView<ShareController> {
+  const ShareScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -23,10 +23,7 @@ class PeerDiscoveryScreen extends GetView<ShareController> {
 
         if (controller.peers.isEmpty) {
           return const Center(
-            child: Text(
-              "No nearby devices found",
-              style: TextStyle(fontSize: 18),
-            ),
+            child: Text("No Nearby Device Found"),
           );
         }
 
@@ -35,9 +32,9 @@ class PeerDiscoveryScreen extends GetView<ShareController> {
           child: ListView.builder(
             itemCount: controller.peers.length,
             itemBuilder: (context, index) {
-              final peer = controller.peers[index];
-
-              return PeerTile(peer: peer);
+              return PeerTile(
+                peer: controller.peers[index],
+              );
             },
           ),
         );
