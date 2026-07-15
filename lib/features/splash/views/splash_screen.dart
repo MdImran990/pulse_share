@@ -8,6 +8,8 @@ class SplashScreen extends GetView<SplashController> {
 
   @override
   Widget build(BuildContext context) {
+    // Access controller to ensure it is initialized when the view is built
+    controller;
 
     return Scaffold(
 
