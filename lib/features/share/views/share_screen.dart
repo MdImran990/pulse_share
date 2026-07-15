@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../../widgets/empty_widget.dart';
 import '../controllers/share_controller.dart';
 import '../widgets/peer_tile.dart';
 
@@ -22,8 +23,12 @@ class ShareScreen extends GetView<ShareController> {
         }
 
         if (controller.peers.isEmpty) {
-          return const Center(
-            child: Text("No Nearby Device Found"),
+          return EmptyWidget(
+            icon: Icons.wifi_find_rounded,
+            title: "Searching for Devices...",
+            subtitle: "Make sure other devices are on the same Wi-Fi and have Pulse Share open.",
+            onRetry: () => controller.discoverPeers(),
+            retryLabel: "Scan Again",
           );
         }
 

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../../widgets/empty_widget.dart';
 import '../controllers/received_controller.dart';
 import '../widgets/snapshot_card.dart';
 
@@ -22,11 +23,10 @@ class ReceivedScreen extends GetView<ReceivedController> {
       ),
       body: Obx(() {
         if (controller.receivedList.isEmpty) {
-          return const Center(
-            child: Text(
-              "No Pulse Received Yet",
-              style: TextStyle(fontSize: 18),
-            ),
+          return const EmptyWidget(
+            icon: Icons.history,
+            title: "No Pulse History",
+            subtitle: "You have not received any device telemetry snapshots yet. Start sharing on your local Wi-Fi!",
           );
         }
 

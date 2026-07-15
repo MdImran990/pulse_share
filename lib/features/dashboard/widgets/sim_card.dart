@@ -28,15 +28,22 @@ class SimCard extends StatelessWidget {
           children: [
             Row(
               children: [
-                Icon(
-                  Icons.sim_card,
-                  color: Theme.of(context).colorScheme.primary,
-                  size: 28,
+                Container(
+                  padding: const EdgeInsets.all(8),
+                  decoration: BoxDecoration(
+                    color: Colors.purple.withAlpha(26),
+                    shape: BoxShape.circle,
+                  ),
+                  child: const Icon(
+                    Icons.sim_card,
+                    color: Colors.purple,
+                    size: 24,
+                  ),
                 ),
                 const SizedBox(width: 12),
                 Text(
                   "SIM Card Details",
-                  style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                  style: Theme.of(context).textTheme.titleMedium?.copyWith(
                         fontWeight: FontWeight.bold,
                       ),
                 ),

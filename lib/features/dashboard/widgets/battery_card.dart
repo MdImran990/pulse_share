@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'info_tile.dart';
 
 class BatteryCard extends StatelessWidget {
   final String level;
@@ -15,25 +16,70 @@ class BatteryCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      elevation: 3,
+      elevation: 4,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(16),
+      ),
       child: Padding(
         padding: const EdgeInsets.all(16),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text(
-              "Battery Information",
-              style: TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.bold,
-              ),
+            Row(
+              children: [
+                Container(
+                  padding: const EdgeInsets.all(8),
+                  decoration: const BoxDecoration(
+                    color: Color(0x1aff0000), // red with 10% opacity / alpha 26
+                    shape: BoxShape.circle,
+                  ),
+                  child: const Icon(
+                    Icons.battery_charging_full,
+                    color: Colors.red,
+                    size: 24,
+                  ),
+                ),
+                const SizedBox(width: 12),
+                Text(
+                  "Battery Information",
+                  style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                        fontWeight: FontWeight.bold,
+                      ),
+                ),
+              ],
             ),
-
+            const Divider(height: 24),
+            Row(
+              children: [
+                Expanded(
+                  child: InfoTile(
+                    title: "Battery Level",
+                    value: level,
+                    icon: Icons.bolt,
+                  ),
+                ),
+                Expanded(
+                  child: InfoTile(
+                    title: "Temperature",
+                    value: temperature,
+                    icon: Icons.thermostat,
+                  ),
+                ),
+              ],
+            ),
             const SizedBox(height: 12),
-
-            Text("Level : $level"),
-            Text("Temperature : $temperature"),
-            Text("Health : $health"),
+            Row(
+              children: [
+                Expanded(
+                  child: InfoTile(
+                    title: "Health Status",
+                    value: health,
+                    icon: Icons.health_and_safety,
+                  ),
+                ),
+                const Spacer(),
+              ],
+            ),
           ],
         ),
       ),

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import 'info_tile.dart';
 
 class SensorCard extends StatelessWidget {
@@ -15,30 +14,56 @@ class SensorCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      margin: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+      elevation: 4,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(16),
+      ),
       child: Padding(
         padding: const EdgeInsets.all(16),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text(
-              "🚶 Sensor Information",
-              style: TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.bold,
-              ),
+            Row(
+              children: [
+                Container(
+                  padding: const EdgeInsets.all(8),
+                  decoration: BoxDecoration(
+                    color: Colors.orange.withAlpha(26),
+                    shape: BoxShape.circle,
+                  ),
+                  child: const Icon(
+                    Icons.directions_run,
+                    color: Colors.orange,
+                    size: 24,
+                  ),
+                ),
+                const SizedBox(width: 12),
+                Text(
+                  "Sensor Information",
+                  style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                        fontWeight: FontWeight.bold,
+                      ),
+                ),
+              ],
             ),
-
-            const SizedBox(height: 12),
-
-            InfoTile(
-              title: "Steps",
-              value: stepCount,
-            ),
-
-            InfoTile(
-              title: "Activity",
-              value: activity,
+            const Divider(height: 24),
+            Row(
+              children: [
+                Expanded(
+                  child: InfoTile(
+                    title: "Steps (Since Boot)",
+                    value: stepCount,
+                    icon: Icons.directions_walk,
+                  ),
+                ),
+                Expanded(
+                  child: InfoTile(
+                    title: "Current Activity",
+                    value: activity,
+                    icon: Icons.accessibility_new,
+                  ),
+                ),
+              ],
             ),
           ],
         ),

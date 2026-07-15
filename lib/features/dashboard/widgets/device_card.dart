@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import 'info_tile.dart';
 
 class DeviceCard extends StatelessWidget {
@@ -17,35 +16,69 @@ class DeviceCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      margin: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+      elevation: 4,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(16),
+      ),
       child: Padding(
         padding: const EdgeInsets.all(16),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text(
-              "📱 Device Information",
-              style: TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.bold,
-              ),
+            Row(
+              children: [
+                Container(
+                  padding: const EdgeInsets.all(8),
+                  decoration: BoxDecoration(
+                    color: Colors.blue.withAlpha(26),
+                    shape: BoxShape.circle,
+                  ),
+                  child: const Icon(
+                    Icons.phone_android,
+                    color: Colors.blue,
+                    size: 24,
+                  ),
+                ),
+                const SizedBox(width: 12),
+                Text(
+                  "Device Information",
+                  style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                        fontWeight: FontWeight.bold,
+                      ),
+                ),
+              ],
             ),
-
+            const Divider(height: 24),
+            Row(
+              children: [
+                Expanded(
+                  child: InfoTile(
+                    title: "Model",
+                    value: model,
+                    icon: Icons.label_important,
+                  ),
+                ),
+                Expanded(
+                  child: InfoTile(
+                    title: "Android Version",
+                    value: androidVersion,
+                    icon: Icons.android,
+                  ),
+                ),
+              ],
+            ),
             const SizedBox(height: 12),
-
-            InfoTile(
-              title: "Model",
-              value: model,
-            ),
-
-            InfoTile(
-              title: "Android",
-              value: androidVersion,
-            ),
-
-            InfoTile(
-              title: "Device Name",
-              value: deviceName,
+            Row(
+              children: [
+                Expanded(
+                  child: InfoTile(
+                    title: "Device Name",
+                    value: deviceName,
+                    icon: Icons.devices,
+                  ),
+                ),
+                const Spacer(),
+              ],
             ),
           ],
         ),
