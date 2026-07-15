@@ -1,28 +1,24 @@
+import 'package:get/get.dart';
+import '../../core/services/storage_service.dart';
+
 class ReceivedRepository {
-  final List<Map<String, dynamic>> _receivedData = [];
+  final StorageService _storageService = Get.find<StorageService>();
 
-  /// সকল received data return করবে
+  /// Retrieves all received snapshots from Hive.
   List<Map<String, dynamic>> getAllReceivedData() {
-    return List.from(_receivedData);
+    return _storageService.db.getAll();
   }
 
-  /// নতুন data save করবে
-  void saveReceivedData(Map<String, dynamic> data) {
-    _receivedData.add(data);
+  /// Saves a newly received snapshot to Hive.
+  Future<void> saveReceivedData(Map<String, dynamic> data) async {
+    await _storageService.db.save(data);
   }
 
-  /// একটি data remove করবে
-  void removeReceivedData(int index) {
-    if (index >= 0 && index < _receivedData.length) {
-      _receivedData.removeAt(index);
-    }
+  /// Clears all snapshots in Hive.
+  Future<void> clearAll() async {
+    await _storageService.db.clearAll();
   }
 
-  /// সব data delete করবে
-  void clearAll() {
-    _receivedData.clear();
-  }
-
-  /// মোট কতগুলো data আছে
-  int get totalReceived => _receivedData.length;
+  /// Gets the total count of received snapshots.
+  int get totalReceived => _storageService.db.count;
 }

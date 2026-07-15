@@ -14,6 +14,10 @@ class PulseModel {
   final String stepCount;
   final String activity;
 
+  final String simCarrier;
+  final String simState;
+  final String simSignal;
+
   PulseModel({
     required this.batteryLevel,
     required this.batteryTemperature,
@@ -26,6 +30,9 @@ class PulseModel {
     required this.wifiSignal,
     required this.stepCount,
     required this.activity,
+    required this.simCarrier,
+    required this.simState,
+    required this.simSignal,
   });
 
   Map<String, dynamic> toJson() {
@@ -41,6 +48,9 @@ class PulseModel {
       "wifiSignal": wifiSignal,
       "stepCount": stepCount,
       "activity": activity,
+      "simCarrier": simCarrier,
+      "simState": simState,
+      "simSignal": simSignal,
     };
   }
 
@@ -57,6 +67,9 @@ class PulseModel {
       wifiSignal: json["wifiSignal"] ?? "",
       stepCount: json["stepCount"] ?? "",
       activity: json["activity"] ?? "",
+      simCarrier: json["simCarrier"] ?? "",
+      simState: json["simState"] ?? "",
+      simSignal: json["simSignal"] ?? "",
     );
   }
 }

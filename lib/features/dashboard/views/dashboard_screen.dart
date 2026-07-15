@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../../app/routes/app_routes.dart';
 import '../controllers/dashboard_controller.dart';
 import '../widgets/battery_card.dart';
 import '../widgets/device_card.dart';
 import '../widgets/network_card.dart';
 import '../widgets/sensor_card.dart';
+import '../widgets/sim_card.dart';
+import '../widgets/share_button.dart';
 
 class DashboardScreen extends GetView<DashboardController> {
   const DashboardScreen({super.key});
@@ -14,8 +17,15 @@ class DashboardScreen extends GetView<DashboardController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Pulse Share"),
+        title: const Text("Pulse Share Dashboard"),
         centerTitle: true,
+        actions: [
+          IconButton(
+            tooltip: "Received Pulses",
+            onPressed: () => Get.toNamed(AppRoutes.received),
+            icon: const Icon(Icons.history, size: 28),
+          ),
+        ],
       ),
       body: Obx(() {
         if (controller.isLoading.value) {
@@ -29,18 +39,18 @@ class DashboardScreen extends GetView<DashboardController> {
           child: ListView(
             padding: const EdgeInsets.all(16),
             children: [
-              BatteryCard(
-                level: controller.batteryLevel.value,
-                temperature: controller.batteryTemp.value,
-                health: controller.batteryHealth.value,
-              ),
-
-              const SizedBox(height: 16),
-
               DeviceCard(
                 model: controller.deviceModel.value,
                 androidVersion: controller.androidVersion.value,
                 deviceName: controller.deviceName.value,
+              ),
+
+              const SizedBox(height: 16),
+
+              BatteryCard(
+                level: controller.batteryLevel.value,
+                temperature: controller.batteryTemp.value,
+                health: controller.batteryHealth.value,
               ),
 
               const SizedBox(height: 16),
@@ -53,6 +63,14 @@ class DashboardScreen extends GetView<DashboardController> {
 
               const SizedBox(height: 16),
 
+              SimCard(
+                carrier: controller.simCarrier.value,
+                state: controller.simState.value,
+                signal: controller.simSignal.value,
+              ),
+
+              const SizedBox(height: 16),
+
               SensorCard(
                 stepCount: controller.stepCount.value,
                 activity: controller.activity.value,
@@ -60,16 +78,7 @@ class DashboardScreen extends GetView<DashboardController> {
 
               const SizedBox(height: 24),
 
-              SizedBox(
-                width: double.infinity,
-                child: ElevatedButton.icon(
-                  onPressed: () {
-                    // Step 12 এ Share Function যোগ করবো
-                  },
-                  icon: const Icon(Icons.share),
-                  label: const Text("Share My Pulse"),
-                ),
-              ),
+              const ShareButton(),
             ],
           ),
         );
